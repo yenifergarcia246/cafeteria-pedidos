@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedidos Cafetería</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <header>
+    <h1>Pedidos Cafetería</h1>
+    <nav>
+      <a href="#" onclick="mostrarSeccion('nuevopedido')">Registro de pedidos</a>
+      <a href="#" onclick="mostrarSeccion('pedidos')">Pedidos del Día</a>
+      <a href="#" onclick="mostrarSeccion('resumen')">Resumen Diario</a>
+    </nav>
+  </header>
+  
+
+  <div class="contenedor">
+
+    <section id="nuevopedido" class="seccion">
+      <h2>Registrar Pedido</h2>
+      <input type="text" id="nombreCliente" placeholder="Nombre del cliente" />
+      <textarea id="listaProductos" placeholder="Productos pedidos..."></textarea>
+      <button class="boton" onclick="guardarPedido()">Guardar Pedido</button>
+    </section>
+
+    <section id="pedidos" class="seccion">
+      <h2>Pedidos del Día</h2>
+      <select id="estadoFiltro" onchange="filtrarPedidos()">
+        <option value="todos">Todos</option>
+        <option value="pendiente">Pendientes</option>
+        <option value="entregado">Entregados</option>
+      </select>
+      <ul id="pedidosLista"></ul>
+    </section>
+
+    <section id="resumen" class="seccion">
+      <h2>Resumen Diario</h2>
+      <button class="boton" onclick="mostrarResumen()">Generar Resumen</button>
+      <p id="textoResumen"></p>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
