@@ -37,7 +37,7 @@ function mostrarPedidos(filtro = "todos") {
     item.innerHTML = `
       <b>${pedido.nombre}</b> - ${pedido.productos} (${pedido.hora}) 
       [${pedido.estado.toUpperCase()}]
-      ${pedido.estado === "pendiente" ? <button onclick="marcarEntregado(${indice})">Entregar</button> : ""}
+      ${pedido.estado === "pendiente" ? `<button onclick="marcarEntregado(${indice})">Entregar</button>` : ""}
     `;
     lista.appendChild(item);
   });
@@ -55,21 +55,16 @@ function marcarEntregado(indice) {
 }
 
 function mostrarResumen() {
-    const resumen = pedidos.reduce((acum, pedido) => {
-      pedido.productos.split(",").forEach(prod => {
-        const p = prod.trim();
-        if (p) acum[p] = (acum[p] || 0) + 1;
-      });
-      return acum;
-    }, {});
-  
-    // ← Aquí faltaban los backticks:
-    const texto = Object.entries(resumen)
-      .map(([producto, cantidad]) => `${producto}: ${cantidad}`)
-      .join("\n");
-  
-    document.getElementById("textoResumen").innerText =
-      texto || "No hay datos para mostrar.";
-  }
+  const resumen = pedidos.reduce((acum, pedido) => {
+    pedido.productos.split(",").forEach(prod => {
+      const p = prod.trim();
+      if (p) acum[p] = (acum[p] || 0) + 1;
+    });
+    return acum;
+  }, {});
+
+  const texto = Object.entries(resumen).map(([producto, cantidad]) => `${producto}: ${cantidad}`).join("\n");
+  document.getElementById("textoResumen").innerText = texto || "No hay datos para mostrar.";
+}
 
 mostrarSeccion("nuevopedido");
