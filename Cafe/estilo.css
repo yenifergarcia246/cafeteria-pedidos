@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f1f1;
+  margin: 0;
+}
+
+header {
+  background: #ebc4a0;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+nav a {
+  color: rgb(16, 14, 14);
+  margin: 0 15px;
+  text-decoration: none;
+}
+
+.contenedor {
+  padding: 20px;
+}
+
+.seccion {
+  display: none;
+}
+
+input, textarea, select {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.boton {
+  background: #f7c784;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.boton:hover {
+  background: #ed7c3b;
+}
