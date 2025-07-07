@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Registro</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    <!-- Font Awesome para el ícono del usuario -->
+    <script src="https://kit.fontawesome.com/a2b09dcbcb.js" crossorigin="anonymous" defer></script>
+    <style>
+      :root {
+        --primary: #3d1b0b;
+        --primary-light: #020111;
+        --bg: #ffdab0;
+        --white: #ffffff;
+        --gray: #060c00;
+        --danger: #ef4444;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      .card {
+        background: var(--white);
+        width: 100%;
+        max-width: 420px;
+        border-radius: 1rem;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem 2rem 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card .icon {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: var(--white);
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        box-shadow: 0 5px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      label {
+        display: block;
+        font-size: 0.9rem;
+        color: var(--gray);
+        margin-bottom: 0.25rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 2px solid #152b57;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: border 0.3s;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      .error {
+        font-size: 0.8rem;
+        color: var(--danger);
+        margin-top: 0.25rem;
+        display: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background: var(--primary);
+        color: var(--white);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: var(--primary-light);
+      }
+
+      .toggle-link {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: var(--gray);
+        cursor: pointer;
+      }
+
+      .toggle-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Animación simple al cambiar de formulario */
+      .form {
+        opacity: 0;
+        transform: translateX(60px);
+        transition: opacity 0.4s, transform 0.4s;
+        position: absolute;
+        width: 100%;
+      }
+
+      .form.active {
+        opacity: 1;
+        transform: translateX(0);
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="icon">
+        <i class="fa-solid fa-user"></i>
+      </div>
+
+      <!-- Formulario de Inicio de Sesión -->
+      <form id="loginForm" class="form active" novalidate>
+        <h2>Iniciar Sesión</h2>
+        <div class="form-group">
+          <label for="loginEmail">Correo electrónico</label>
+          <input type="email" id="loginEmail" placeholder="ejemplo@correo.com" required />
+          <span class="error">Ingrese un correo válido</span>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" placeholder="********" minlength="6" required />
+          <span class="error">La contraseña debe tener al menos 6 caracteres</span>
+        </div>
+        <button type="submit">Entrar</button>
+        <span class="toggle-link" data-target="registerForm">¿No tienes cuenta? Crear una</span>
+      </form>
+
+      <!-- Formulario de Registro -->
+      <form id="registerForm" class="form" novalidate>
+        <h2>Crear Cuenta</h2>
+        <div class="form-group">
+          <label for="registerEmail">Correo electrónico</label>
+          <input type="email" id="registerEmail" placeholder="ejemplo@correo.com" required />
+          <span class="error">Ingrese un correo válido</span>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Contraseña</label>
+          <input type="password" id="registerPassword" placeholder="********" minlength="6" required />
+          <span class="error">La contraseña debe tener al menos 6 caracteres</span>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmar Contraseña</label>
+          <input type="password" id="confirmPassword" placeholder="********" minlength="6" required />
+          <span class="error">Las contraseñas no coinciden</span>
+        </div>
+        <button type="submit">Registrarme</button>
+        <span class="toggle-link" data-target="loginForm">¿Ya tienes cuenta? Inicia sesión</span>
+      </form>
+    </div>
+
+    <script>
+      // Helper para seleccionar elementos
+      const qs = (selector) => document.querySelector(selector);
+
+      const loginForm = qs("#loginForm");
+      const registerForm = qs("#registerForm");
+      const toggleLinks = document.querySelectorAll(".toggle-link");
+
+      // Cambiar entre formularios
+      toggleLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          const target = qs("#" + link.dataset.target);
+          document.querySelectorAll(".form").forEach((f) => f.classList.remove("active"));
+          target.classList.add("active");
+        });
+      });
+
+      // Validaciones comunes
+      function showError(inputEl, message) {
+        const errorEl = inputEl.nextElementSibling;
+        errorEl.textContent = message;
+        errorEl.style.display = "block";
+      }
+
+      function hideError(inputEl) {
+        const errorEl = inputEl.nextElementSibling;
+        errorEl.style.display = "none";
+      }
+
+      function isEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // Obtener usuarios almacenados
+      function getUsers() {
+        return JSON.parse(localStorage.getItem("users")) || [];
+      }
+
+      function saveUsers(users) {
+        localStorage.setItem("users", JSON.stringify(users));
+      }
+
+      /* ---------- Registro ---------- */
+      registerForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = qs("#registerEmail");
+        const password = qs("#registerPassword");
+        const confirmPassword = qs("#confirmPassword");
+
+        // Validaciones
+        let valid = true;
+        if (!isEmail(email.value)) {
+          showError(email, "Ingrese un correo válido");
+          valid = false;
+        } else hideError(email);
+
+        if (password.value.length < 6) {
+          showError(password, "La contraseña debe tener al menos 6 caracteres");
+          valid = false;
+        } else hideError(password);
+
+        if (password.value !== confirmPassword.value) {
+          showError(confirmPassword, "Las contraseñas no coinciden");
+          valid = false;
+        } else hideError(confirmPassword);
+
+        if (!valid) return;
+
+        // Guardar usuario
+        const users = getUsers();
+        if (users.some((u) => u.email === email.value)) {
+          alert("El correo ya está registrado");
+          return;
+        }
+        users.push({ email: email.value, password: btoa(password.value) }); // btoa = encode base64 sencillo (no seguro para producción)
+        saveUsers(users);
+
+        alert("Registro exitoso. Ahora puedes iniciar sesión");
+        registerForm.reset();
+        qs('[data-target="loginForm"]').click();
+      });
+
+      /* ---------- Inicio de Sesión ---------- */
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = qs("#loginEmail");
+        const password = qs("#loginPassword");
+
+        let valid = true;
+        if (!isEmail(email.value)) {
+          showError(email, "Ingrese un correo válido");
+          valid = false;
+        } else hideError(email);
+
+        if (password.value.length < 6) {
+          showError(password, "La contraseña debe tener al menos 6 caracteres");
+          valid = false;
+        } else hideError(password);
+
+        if (!valid) return;
+
+        const users = getUsers();
+        const user = users.find((u) => u.email === email.value && u.password === btoa(password.value));
+        if (user) {
+          alert("¡Bienvenido " + email.value + "!");
+          loginForm.reset();
+          // Aquí puedes redirigir al usuario a otra página
+        } else {
+          alert("Correo o contraseña incorrectos");
+        }
+      });
+    </script>
+  </body>
+</html>
